@@ -9,7 +9,7 @@ from keras.models import load_model
 import numpy as np
 from keras.preprocessing import image
 
-model = load_model('VGG16_model.h5')
+model = load_model('VGG19_model.h5')
 
 # Loading the cascades
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
@@ -53,12 +53,10 @@ while True:
         name="None matching"
         
         if(pred[0][0]>0.5):
-            name='Newsun'
-        elif(pred[0][1]>0.5):
-            name='Niraj'
-        elif(pred[0][2]>0.5):
-            name='Ashim'
-        cv2.putText(frame,name, (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (0,255,0), 2)
+            name = 'Newsun'
+        if(pred[0][1]>0.5):
+            name = 'Niraj'
+        cv2.putText(frame,name, (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (255,0,0), 2)
     else:
         cv2.putText(frame,"No face found", (50, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (0,255,0), 2)
     cv2.imshow('Video', frame)
